@@ -15,6 +15,7 @@
 // @grant        GM_setValue
 // @grant        GM_download
 // @grant        GM_openInTab
+// @grant        GM_setClipboard
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @run-at       document-idle
 // @updateURL    http://raw.githack.com/ourstoryzj/chrome_js/master/main.js
@@ -27,6 +28,7 @@
     var url = window.location.href;
 
     if (url.indexOf('uvtao.com') > -1) {
+        //=======================================================================================
         //如果是uvtao教程网站，自动打开百度网盘并输入密码
         if (document.getElementsByClassName('t_f')[0].getElementsByTagName('a')[0] != null) {
             var aa = document.getElementsByClassName('t_f')[0].getElementsByTagName('a')[document.getElementsByClassName('t_f')[0].getElementsByTagName('a').length - 1].href;
@@ -44,6 +46,7 @@
             }
         }
     } else if (url.indexOf('pan.baidu.com/share/init?surl') > -1) {
+        //=======================================================================================
         //如果是uvtao教程网站，自动打开百度网盘并输入密码
         var ma = GM_getValue('tiqumas');
         //alert(ma);
@@ -83,6 +86,7 @@
         }
 
     } else if (url.indexOf('pan.baidu.com/s') > -1) {
+        //=======================================================================================
         //进入网盘，自动点击全选，点击保存，点击上次存储位置
         if (document.getElementsByClassName('share-list')[0] != null) {
             document.getElementsByClassName('share-list')[0].getElementsByTagName('li')[2].getElementsByTagName('span')[0].click(); //全选
@@ -92,6 +96,7 @@
             document.getElementsByClassName('save-chk-io')[0].click(); //常用
         }, 500);
     } else if (url.indexOf('taobao.com/category') > -1 || url.indexOf('taobao.com/search') > -1) {
+        //=======================================================================================
         //进入淘宝分类页面，提取当页面所有商品链接
         //添加p标签
         var p = document.createElement('p');
@@ -104,8 +109,50 @@
                 p.innerHTML = p.innerHTML + '<br> ' + href_str;
             }
             GM_setClipboard(p.innerText);
-
         }, 3000);
+    }
+    else if (url.indexOf('item.taobao.com/item.htm') > -1) {
+        //======================================================================================= 
+        //如果进入了宝贝详情页
+        setTimeout(function () {
+            var p = document.createElement('p');
+            p.id = 'zj_showbox';
+            document.body.appendChild(p);
+            console.info(document.head.innerHTML);
+            //alert(zhangjian.itemId.name);
+            var dt = new Date(g_config.idata.item.dbst);
+            p.innerHTML = p.innerHTML + '<br> 上架日期 ： ' + dt.toString();
+        }, 3000);
+    }
+    else if (url.indexOf('login.taobao.com') > -1) {
+        //======================================================================================= 
+        //自动登录
+        var username = document.getElementById('TPL_username_1');
+        username.focus();
+        username.value = '迷你淘包铺';
+        var password = document.getElementById('TPL_password_1');
+        password.focus();
+        password.value = 'zj013368qw@';
+        var btns = document.getElementById('J_SubmitStatic');
+        btns.focus();
+        setTimeout(function () {
+            //检测是否需要安全验证
+            var noCaptcha = document.getElementById('nocaptcha');
+            if (noCaptcha && noCaptcha.className == "nc-container tb-login" &&
+                noCaptcha.style.display != "block") {
+                var submitStatic = document.getElementById("J_SubmitStatic");
+                if (submitStatic) submitStatic.click();
+            }
+        }, 2000);
+    }
+    else if(url.indexOf('breakserver.hichina.com')>-1){
+        //======================================================================================= 
+        //自动登录OA
+        var pwd = document.getElementById('password');
+        pwd.focus();
+        pwd.value = 'zhangjian';
+        var vc = document.getElementById('verify_code');
+        vc.focus();
     }
 
 })();
