@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         New Userscript
+// @name         chrome_js
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -31,11 +31,15 @@
         //=======================================================================================
         //如果是uvtao教程网站，自动打开百度网盘并输入密码
         if (document.getElementsByClassName('t_f')[0].getElementsByTagName('a')[0] != null) {
-            var aa = document.getElementsByClassName('t_f')[0].getElementsByTagName('a')[document.getElementsByClassName('t_f')[0].getElementsByTagName('a').length - 1].href;
+            var aa = document.getElementsByClassName('t_f')[0].getElementsByTagName('a')[document.getElementsByClassName('t_f')[0].getElementsByTagName
+
+('a').length - 1].href;
             console.log(aa);
             //alert(aa);
             if (aa.indexOf('pan.baidu.com') > -1) {
-                var tiquma = document.getElementsByClassName('t_f')[0].getElementsByTagName('div')[document.getElementsByClassName('t_f')[0].getElementsByTagName('div').length - 1].innerText;
+                var tiquma = document.getElementsByClassName('t_f')[0].getElementsByTagName('div')[document.getElementsByClassName('t_f')[0].getElementsByTagName
+
+('div').length - 1].innerText;
                 console.log(tiquma);
                 tiquma = tiquma.replace('提取码：', "");
                 //setCookie('tiquma',tiquma,30);
@@ -105,27 +109,25 @@
         setTimeout(function () {
             var length = document.getElementsByClassName('shop-hesper-bd grid')[0].getElementsByClassName('item').length;
             for (var i = 0; i < length; i++) {
-                var href_str = document.getElementsByClassName('shop-hesper-bd grid')[0].getElementsByClassName('item')[i].getElementsByClassName('J_TGoldData')[0].href
+                var href_str = document.getElementsByClassName('shop-hesper-bd grid')[0].getElementsByClassName('item')[i].getElementsByClassName('J_TGoldData')
+
+[0].href
                 p.innerHTML = p.innerHTML + '<br> ' + href_str;
             }
             GM_setClipboard(p.innerText);
         }, 3000);
     }
     else if (url.indexOf('item.taobao.com/item.htm') > -1) {
-        //======================================================================================= 
+        //=======================================================================================
         //如果进入了宝贝详情页
         setTimeout(function () {
-            var p = document.createElement('p');
-            p.id = 'zj_showbox';
-            document.body.appendChild(p);
-            console.info(document.head.innerHTML);
-            //alert(zhangjian.itemId.name);
-            var dt = new Date(g_config.idata.item.dbst);
-            p.innerHTML = p.innerHTML + '<br> 上架日期 ： ' + dt.toString();
+	        var dt =g_config.idata.item.dbst;
+            var updt = new Date(dt).toLocaleString();
+            document.getElementsByClassName('tb-main-title')[0].innerText = document.getElementsByClassName('tb-main-title')[0].innerText + '上架时间:'+updt;
         }, 3000);
     }
     else if (url.indexOf('login.taobao.com') > -1) {
-        //======================================================================================= 
+        //=======================================================================================
         //自动登录
         var username = document.getElementById('TPL_username_1');
         username.focus();
@@ -146,7 +148,7 @@
         }, 2000);
     }
     else if(url.indexOf('breakserver.hichina.com')>-1){
-        //======================================================================================= 
+        //=======================================================================================
         //自动登录OA
         var pwd = document.getElementById('password');
         pwd.focus();
