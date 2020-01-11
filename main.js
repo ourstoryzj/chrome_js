@@ -28,18 +28,18 @@
     var url = window.location.href;
 
     if (url.indexOf('uvtao.com') > -1) {
-        //=======================================================================================
+        //============================================================================================================================================== uvtao
         //如果是uvtao教程网站，自动打开百度网盘并输入密码
         if (document.getElementsByClassName('t_f')[0].getElementsByTagName('a')[0] != null) {
             var aa = document.getElementsByClassName('t_f')[0].getElementsByTagName('a')[document.getElementsByClassName('t_f')[0].getElementsByTagName
 
-('a').length - 1].href;
+                ('a').length - 1].href;
             console.log(aa);
             //alert(aa);
             if (aa.indexOf('pan.baidu.com') > -1) {
                 var tiquma = document.getElementsByClassName('t_f')[0].getElementsByTagName('div')[document.getElementsByClassName('t_f')[0].getElementsByTagName
 
-('div').length - 1].innerText;
+                    ('div').length - 1].innerText;
                 console.log(tiquma);
                 tiquma = tiquma.replace('提取码：', "");
                 //setCookie('tiquma',tiquma,30);
@@ -50,7 +50,7 @@
             }
         }
     } else if (url.indexOf('pan.baidu.com/share/init?surl') > -1) {
-        //=======================================================================================
+        //============================================================================================================================================== pan.baidu.com
         //如果是uvtao教程网站，自动打开百度网盘并输入密码
         var ma = GM_getValue('tiqumas');
         //alert(ma);
@@ -90,7 +90,7 @@
         }
 
     } else if (url.indexOf('pan.baidu.com/s') > -1) {
-        //=======================================================================================
+        //============================================================================================================================================== pan.baidu.com
         //进入网盘，自动点击全选，点击保存，点击上次存储位置
         if (document.getElementsByClassName('share-list')[0] != null) {
             document.getElementsByClassName('share-list')[0].getElementsByTagName('li')[2].getElementsByTagName('span')[0].click(); //全选
@@ -100,7 +100,7 @@
             document.getElementsByClassName('save-chk-io')[0].click(); //常用
         }, 500);
     } else if (url.indexOf('taobao.com/category') > -1 || url.indexOf('taobao.com/search') > -1) {
-        //=======================================================================================
+        //============================================================================================================================================== taobao.com
         //进入淘宝分类页面，提取当页面所有商品链接
         //添加p标签
         var p = document.createElement('p');
@@ -111,44 +111,47 @@
             for (var i = 0; i < length; i++) {
                 var href_str = document.getElementsByClassName('shop-hesper-bd grid')[0].getElementsByClassName('item')[i].getElementsByClassName('J_TGoldData')
 
-[0].href
+                [0].href
                 p.innerHTML = p.innerHTML + '<br> ' + href_str;
             }
             GM_setClipboard(p.innerText);
         }, 3000);
     }
     else if (url.indexOf('item.taobao.com/item.htm') > -1) {
-        //=======================================================================================
+        //============================================================================================================================================== item.taobao.com
         //如果进入了宝贝详情页
         setTimeout(function () {
-	        var dt =g_config.idata.item.dbst;
+            var dt = g_config.idata.item.dbst;
             var updt = new Date(dt).toLocaleString();
-            document.getElementsByClassName('tb-main-title')[0].innerText = document.getElementsByClassName('tb-main-title')[0].innerText + '上架时间:'+updt;
+            document.getElementsByClassName('tb-main-title')[0].innerText = document.getElementsByClassName('tb-main-title')[0].innerText + '上架时间:' + updt;
         }, 3000);
     }
     else if (url.indexOf('login.taobao.com') > -1) {
-        //=======================================================================================
+        //============================================================================================================================================== login.taobao.com
         //自动登录
-        var username = document.getElementById('TPL_username_1');
-        username.focus();
-        username.value = '迷你淘包铺';
-        var password = document.getElementById('TPL_password_1');
-        password.focus();
-        password.value = 'zj013368qw@';
-        var btns = document.getElementById('J_SubmitStatic');
-        btns.focus();
         setTimeout(function () {
-            //检测是否需要安全验证
-            var noCaptcha = document.getElementById('nocaptcha');
-            if (noCaptcha && noCaptcha.className == "nc-container tb-login" &&
-                noCaptcha.style.display != "block") {
-                var submitStatic = document.getElementById("J_SubmitStatic");
-                if (submitStatic) submitStatic.click();
-            }
+            var username = document.getElementById('TPL_username_1');
+            username.focus();
+            //username.value = '迷你淘包铺';
+            username.value = '生如夏花_小七';
+            var password = document.getElementById('TPL_password_1');
+            password.focus();
+            password.value = 'qgr1989620!';
+            var btns = document.getElementById('J_SubmitStatic');
+            btns.focus();
+            setTimeout(function () {
+                //检测是否需要安全验证
+                var noCaptcha = document.getElementById('nocaptcha');
+                if (noCaptcha && noCaptcha.className == "nc-container tb-login" &&
+                    noCaptcha.style.display != "block") {
+                    var submitStatic = document.getElementById("J_SubmitStatic");
+                    if (submitStatic) submitStatic.click();
+                }
+            }, 2000);
         }, 2000);
     }
-    else if(url.indexOf('breakserver.hichina.com')>-1){
-        //=======================================================================================
+    else if (url.indexOf('breakserver.hichina.com') > -1) {
+        //============================================================================================================================================== hichina.com
         //自动登录OA
         var pwd = document.getElementById('password');
         pwd.focus();
