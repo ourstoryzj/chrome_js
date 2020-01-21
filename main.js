@@ -49,6 +49,17 @@
                 window.location.href = aa;
             }
         }
+        //接触不能复制
+        document.onselectstart = function(){
+            event.returnValue = true;
+        }
+        document.onkeydown = function(){
+            event.returnValue = true;
+        }
+        // 或者直接返回整个事件
+        //document.onselectstart = function(){
+            //return false;
+        //}
     } else if (url.indexOf('pan.baidu.com/share/init?surl') > -1) {
         //============================================================================================================================================== pan.baidu.com
         //如果是uvtao教程网站，自动打开百度网盘并输入密码
@@ -159,5 +170,6 @@
         var vc = document.getElementById('verify_code');
         vc.focus();
     }
+
 
 })();
